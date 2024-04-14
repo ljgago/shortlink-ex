@@ -1,4 +1,4 @@
-# Shortex
+# Shortlink
 
 To start your Phoenix server:
 

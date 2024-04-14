@@ -1,9 +1,9 @@
-defmodule Shortex.MixProject do
+defmodule Shortlink.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :shortex,
+      app: :shortlink,
       version: "0.1.0",
       elixir: "~> 1.14",
       elixirc_paths: elixirc_paths(Mix.env()),
@@ -18,7 +18,7 @@ defmodule Shortex.MixProject do
   # Type `mix help compile.app` for more information.
   def application do
     [
-      mod: {Shortex.Application, []},
+      mod: {Shortlink.Application, []},
       extra_applications: [:logger, :runtime_tools]
     ]
   end
@@ -32,7 +32,7 @@ defmodule Shortex.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.7.11"},
+      {:phoenix, "~> 1.7.12"},
       {:phoenix_ecto, "~> 4.4"},
       {:ecto_sql, "~> 3.10"},
       {:postgrex, ">= 0.0.0"},
@@ -45,7 +45,7 @@ defmodule Shortex.MixProject do
       {:tailwind, "~> 0.2", runtime: Mix.env() == :dev},
       {:heroicons,
        github: "tailwindlabs/heroicons",
-       tag: "v2.1.1",
+       tag: "v2.1.3",
        sparse: "optimized",
        app: false,
        compile: false,
@@ -58,7 +58,8 @@ defmodule Shortex.MixProject do
       {:jason, "~> 1.2"},
       {:dns_cluster, "~> 0.1.1"},
       {:bandit, "~> 1.2"},
-      {:sqids, "~> 0.1.0"}
+      {:sqids, "~> 0.1.0"},
+      {:quantum, "~> 3.5"}
     ]
   end
 
@@ -75,10 +76,10 @@ defmodule Shortex.MixProject do
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
       "assets.setup": ["tailwind.install --if-missing", "esbuild.install --if-missing"],
-      "assets.build": ["tailwind shortex", "esbuild shortex"],
+      "assets.build": ["tailwind shortlink", "esbuild shortlink"],
       "assets.deploy": [
-        "tailwind shortex --minify",
-        "esbuild shortex --minify",
+        "tailwind shortlink --minify",
+        "esbuild shortlink --minify",
         "phx.digest"
       ]
     ]

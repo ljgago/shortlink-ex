@@ -7,19 +7,20 @@
 # General application configuration
 import Config
 
-config :shortex,
-  ecto_repos: [Shortex.Repo],
+config :shortlink,
+  ecto_repos: [Shortlink.Repo],
   generators: [timestamp_type: :utc_datetime]
 
 # Configures the endpoint
-config :shortex, ShortexWeb.Endpoint,
+config :shortlink, ShortlinkWeb.Endpoint,
   url: [host: "localhost"],
   adapter: Bandit.PhoenixAdapter,
   render_errors: [
-    formats: [html: ShortexWeb.ErrorHTML, json: ShortexWeb.ErrorJSON],
-    layout: false
+    formats: [html: ShortlinkWeb.ErrorHTML, json: ShortlinkWeb.ErrorJSON],
+    root_layout: {ShortlinkWeb.Layouts, :root},
+    layout: {ShortlinkWeb.Layouts, :app}
   ],
-  pubsub_server: Shortex.PubSub,
+  pubsub_server: Shortlink.PubSub,
   live_view: [signing_salt: "xx6Bg4jK"]
 
 # Configures the mailer
@@ -29,12 +30,12 @@ config :shortex, ShortexWeb.Endpoint,
 #
 # For production it's recommended to configure a different adapter
 # at the `config/runtime.exs`.
-config :shortex, Shortex.Mailer, adapter: Swoosh.Adapters.Local
+config :shortlink, Shortlink.Mailer, adapter: Swoosh.Adapters.Local
 
 # Configure esbuild (the version is required)
 config :esbuild,
-  version: "0.17.11",
-  shortex: [
+  version: "0.17.12",
+  shortlink: [
     args:
       ~w(js/app.js --bundle --target=es2017 --outdir=../priv/static/assets --external:/fonts/* --external:/images/*),
     cd: Path.expand("../assets", __DIR__),
@@ -43,8 +44,8 @@ config :esbuild,
 
 # Configure tailwind (the version is required)
 config :tailwind,
-  version: "3.4.0",
-  shortex: [
+  version: "3.4.3",
+  shortlink: [
     args: ~w(
       --config=tailwind.config.js
       --input=css/app.css
@@ -60,6 +61,11 @@ config :logger, :console,
 
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
+
+config :shortlink, Shortlink.Scheduler,
+  jobs: [
+    {"@weekly", fn -> Shortlink.Links.delete_expired_links() end}
+  ]
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

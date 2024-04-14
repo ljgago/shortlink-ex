@@ -1,4 +1,4 @@
-defmodule Shortex.DataCase do
+defmodule Shortlink.DataCase do
   @moduledoc """
   This module defines the setup for tests requiring
   access to the application's data layer.
@@ -10,7 +10,7 @@ defmodule Shortex.DataCase do
   we enable the SQL sandbox, so changes done to the database
   are reverted at the end of every test. If you are using
   PostgreSQL, you can even run database tests asynchronously
-  by setting `use Shortex.DataCase, async: true`, although
+  by setting `use Shortlink.DataCase, async: true`, although
   this option is not recommended for other databases.
   """
 
@@ -18,17 +18,17 @@ defmodule Shortex.DataCase do
 
   using do
     quote do
-      alias Shortex.Repo
+      alias Shortlink.Repo
 
       import Ecto
       import Ecto.Changeset
       import Ecto.Query
-      import Shortex.DataCase
+      import Shortlink.DataCase
     end
   end
 
   setup tags do
-    Shortex.DataCase.setup_sandbox(tags)
+    Shortlink.DataCase.setup_sandbox(tags)
     :ok
   end
 
@@ -36,7 +36,7 @@ defmodule Shortex.DataCase do
   Sets up the sandbox based on the test tags.
   """
   def setup_sandbox(tags) do
-    pid = Ecto.Adapters.SQL.Sandbox.start_owner!(Shortex.Repo, shared: not tags[:async])
+    pid = Ecto.Adapters.SQL.Sandbox.start_owner!(Shortlink.Repo, shared: not tags[:async])
     on_exit(fn -> Ecto.Adapters.SQL.Sandbox.stop_owner(pid) end)
   end
 

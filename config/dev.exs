@@ -1,11 +1,11 @@
 import Config
 
 # Configure your database
-config :shortex, Shortex.Repo,
+config :shortlink, Shortlink.Repo,
   username: "postgres",
   password: "postgres",
   hostname: "localhost",
-  database: "shortex_dev",
+  database: "shortlink_dev",
   stacktrace: true,
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
@@ -16,17 +16,17 @@ config :shortex, Shortex.Repo,
 # The watchers configuration can be used to run external
 # watchers to your application. For example, we can use it
 # to bundle .js and .css sources.
-config :shortex, ShortexWeb.Endpoint,
+config :shortlink, ShortlinkWeb.Endpoint,
   # Binding to loopback ipv4 address prevents access from other machines.
   # Change to `ip: {0, 0, 0, 0}` to allow access from other machines.
   http: [ip: {127, 0, 0, 1}, port: 4000],
   check_origin: false,
   code_reloader: true,
-  debug_errors: true,
+  debug_errors: false,
   secret_key_base: "gEFuDKRIzRVmaPEOeXR4P5kSGip09Hew5ra5BdquuxRflokts2KWyt6ZgiqjYT3V",
   watchers: [
-    esbuild: {Esbuild, :install_and_run, [:shortex, ~w(--sourcemap=inline --watch)]},
-    tailwind: {Tailwind, :install_and_run, [:shortex, ~w(--watch)]}
+    esbuild: {Esbuild, :install_and_run, [:shortlink, ~w(--sourcemap=inline --watch)]},
+    tailwind: {Tailwind, :install_and_run, [:shortlink, ~w(--watch)]}
   ]
 
 # ## SSL Support
@@ -53,17 +53,17 @@ config :shortex, ShortexWeb.Endpoint,
 # different ports.
 
 # Watch static and templates for browser reloading.
-config :shortex, ShortexWeb.Endpoint,
+config :shortlink, ShortlinkWeb.Endpoint,
   live_reload: [
     patterns: [
       ~r"priv/static/(?!uploads/).*(js|css|png|jpeg|jpg|gif|svg)$",
       ~r"priv/gettext/.*(po)$",
-      ~r"lib/shortex_web/(controllers|live|components)/.*(ex|heex)$"
+      ~r"lib/shortlink_web/(controllers|live|components)/.*(ex|heex)$"
     ]
   ]
 
 # Enable dev routes for dashboard and mailbox
-config :shortex, dev_routes: true
+config :shortlink, dev_routes: true
 
 # Do not include metadata nor timestamps in development logs
 config :logger, :console, format: "[$level] $message\n"

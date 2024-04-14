@@ -1,0 +1,10 @@
+<div x-data="{ dark: window.dark }">
+  <button x-on:click="dark = !dark; setDarkMode(dark)">
+    <div x-show="dark">
+      <.icon name="hero-sun" class="h-6 w-6" />
+    </div>
+    <div x-show="!dark">
+      <.icon name="hero-moon" class="h-6 w-6" />
+    </div>
+  </button>
+</div>

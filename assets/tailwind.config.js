@@ -8,9 +8,10 @@ const path = require("path")
 module.exports = {
   content: [
     "./js/**/*.js",
-    "../lib/shortex_web.ex",
-    "../lib/shortex_web/**/*.*ex"
+    "../lib/shortlink_web.ex",
+    "../lib/shortlink_web/**/*.*ex"
   ],
+  darkMode: "class",
   theme: {
     extend: {
       colors: {
