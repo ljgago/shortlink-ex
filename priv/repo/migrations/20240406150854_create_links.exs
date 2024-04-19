@@ -1,4 +1,4 @@
-defmodule Shortex.Repo.Migrations.CreateLinks do
+defmodule Shortlink.Repo.Migrations.CreateLinks do
   use Ecto.Migration
 
   def change do
