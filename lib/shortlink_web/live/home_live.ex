@@ -20,7 +20,7 @@ defmodule ShortlinkWeb.HomeLive do
     <.flash_group flash={@flash} />
     <div class="mx-6 grid place-items-center">
       <div class="flex flex-col gap-2 md:w-[720px] w-full">
-        <h1 class="py-20 text-center text-6xl">
+        <h1 class="py-14 text-center text-6xl">
           Shortlink
         </h1>
         <div class="flex flex-col gap-6">
@@ -102,7 +102,7 @@ defmodule ShortlinkWeb.HomeLive do
   def handle_event("copy-clipboard", %{"value" => short_url}, socket) do
     Process.send_after(self(), :clear_flash, 5000)
 
-    {:noreply, put_flash(socket, :info, "Short URL Copied: #{short_url}")}
+    {:noreply, put_flash(socket, :copy, "#{short_url}")}
   end
 
   @impl true
