@@ -1,10 +1,10 @@
-<div x-data="{ dark: window.dark }">
+<div x-data="{ dark: window.dark }" class="flex">
   <button x-on:click="dark = !dark; setDarkMode(dark)">
-    <div x-show="dark">
-      <.icon name="hero-sun" class="h-6 w-6" />
+    <div x-show="dark" class="flex">
+      <.icon name="hero-sun" class="h-7 w-7" />
     </div>
-    <div x-show="!dark">
-      <.icon name="hero-moon" class="h-6 w-6" />
+    <div x-show="!dark" class="flex">
+      <.icon name="hero-moon" class="h-7 w-7" />
     </div>
   </button>
 </div>
