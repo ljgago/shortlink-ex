@@ -64,7 +64,7 @@ config :phoenix, :json_library, Jason
 
 config :shortlink, Shortlink.Scheduler,
   jobs: [
-    {"@weekly", fn -> Shortlink.Links.delete_expired_links() end}
+    {"@daily", fn -> Shortlink.Links.delete_expired_links() end}
   ]
 
 # Import environment specific config. This must remain at the bottom
