@@ -1,4 +1,4 @@
-defmodule ShortlinkWeb.PageController do
+defmodule ShortlinkWeb.RedirectController do
   use ShortlinkWeb, :controller
 
   alias Shortlink.Links
@@ -12,8 +12,8 @@ defmodule ShortlinkWeb.PageController do
     render(conn, :home, layout: false)
   end
 
-  def show_url(conn, %{"token" => token}) do
-    case Links.get_link_by_token(token) do
+  def redirect_url(conn, %{"code" => code}) do
+    case Links.get_link_by_code(code) do
       nil ->
         conn
         |> put_status(:not_found)
@@ -21,6 +21,7 @@ defmodule ShortlinkWeb.PageController do
         |> render(:"404")
 
       link ->
+        Links.refresh_link(link)
         redirect(conn, external: link.long_url)
     end
   end

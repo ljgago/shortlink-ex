@@ -5,7 +5,6 @@ defmodule Shortlink.Links do
 
   import Ecto.Query, warn: false
   alias Shortlink.Repo
-
   alias Shortlink.Links.Link
 
   @doc """
@@ -44,16 +43,16 @@ defmodule Shortlink.Links do
 
   ## Examples
 
-      iex> get_link_by_token("kahj4KLEhcTteEIK")
+      iex> get_link_by_code("kahj4KLEhcTteEIK")
       %Link{}
 
-      iex> get_link_by_token("123456789abcdefg")
+      iex> get_link_by_code("123456789abcdefg")
       nil
 
   """
-  def get_link_by_token(token) do
+  def get_link_by_code(code) do
     Link
-    |> where(token: ^token)
+    |> where(code: ^code)
     |> Repo.one()
   end
 
@@ -94,6 +93,20 @@ defmodule Shortlink.Links do
   end
 
   @doc """
+  Refresh the link updating the expiry date and incrementing the visit count
+  """
+  def refresh_link(%Link{} = link) do
+    new_expire = DateTime.utc_now(:second) |> DateTime.add(7, :day)
+
+    link
+    |> Ecto.Changeset.change(
+      expire: new_expire,
+      visit_count: link.visit_count + 1
+    )
+    |> Repo.update()
+  end
+
+  @doc """
   Deletes a link.
 
   ## Examples
@@ -119,7 +132,7 @@ defmodule Shortlink.Links do
 
   """
   def delete_expired_links() do
-    from(l in Link, where: l.expire < ^Date.utc_today())
+    from(l in Link, where: l.expire < ^DateTime.utc_now())
     |> Repo.delete_all()
   end
 

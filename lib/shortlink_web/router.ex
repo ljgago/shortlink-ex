@@ -17,7 +17,7 @@ defmodule ShortlinkWeb.Router do
   scope "/", ShortlinkWeb do
     pipe_through :browser
 
-    get "/:token", PageController, :show_url
+    get "/:code", RedirectController, :redirect_url
     live "/", HomeLive, :home
   end
 

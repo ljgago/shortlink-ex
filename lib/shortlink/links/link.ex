@@ -8,8 +8,9 @@ defmodule Shortlink.Links.Link do
   @foreign_key_type :binary_id
   schema "links" do
     field :long_url, :string
-    field :token, :string
-    field :expire, :date
+    field :code, :string
+    field :expire, :utc_datetime
+    field :visit_count, :integer, default: 0
 
     timestamps()
   end
@@ -17,8 +18,9 @@ defmodule Shortlink.Links.Link do
   @doc false
   def changeset(user, attrs) do
     user
-    |> cast(attrs, [:long_url, :token, :expire])
-    |> validate_required([:long_url, :token, :expire])
+    |> cast(attrs, [:long_url, :code, :expire])
+    |> validate_required([:long_url, :code, :expire])
+    |> unique_constraint(:code, name: :links_code_index)
     |> Utils.validate_url(:long_url)
   end
 end

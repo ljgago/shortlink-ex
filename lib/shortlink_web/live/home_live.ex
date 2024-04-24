@@ -11,7 +11,9 @@ defmodule ShortlinkWeb.HomeLive do
         "short_url" => nil
       })
 
-    {:ok, assign(socket, form: form)}
+    peer_data = get_connect_info(socket, :peer_data)
+
+    {:ok, assign(socket, form: form, ip: peer_data.address)}
   end
 
   @impl true
@@ -111,16 +113,12 @@ defmodule ShortlinkWeb.HomeLive do
   end
 
   defp generate_link(socket, %{"long_url" => long_url} = params) do
-    %{
-      long_url: long_url,
-      token: generate_token(),
-      expire: Date.add(Date.utc_today(), 7)
-    }
+    new_link(long_url)
     |> Links.create_link()
     |> case do
       {:ok, link} ->
         short_url =
-          URI.append_path(socket.host_uri, "/#{link.token}")
+          URI.append_path(socket.host_uri, "/#{link.code}")
           |> URI.to_string()
 
         form =
@@ -132,14 +130,28 @@ defmodule ShortlinkWeb.HomeLive do
         assign(socket, :form, form)
 
       {:error, %{errors: errors}} ->
+        IO.inspect(socket.assigns.ip)
         assign(socket, form: to_form(params, errors: errors))
     end
   end
 
-  defp generate_token() do
+  defp new_link(long_url) do
+    %{
+      long_url: long_url,
+      code: generate_code(),
+      expire: DateTime.utc_now(:second) |> DateTime.add(7, :day)
+    }
+  end
+
+  defp generate_code() do
     {:ok, sqids} = Sqids.new(min_length: 5)
     current_date = DateTime.utc_now() |> DateTime.to_unix(:millisecond)
-    numbers = [current_date]
+    fixed_date = ~U[2024-01-01 00:00:00Z] |> DateTime.to_unix(:millisecond)
+
+    diff_number = current_date - fixed_date
+    rand_number = Enum.random(1..9999)
+
+    numbers = [diff_number, rand_number]
     Sqids.encode!(sqids, numbers)
   end
 end
