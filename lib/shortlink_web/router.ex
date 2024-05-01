@@ -18,7 +18,7 @@ defmodule ShortlinkWeb.Router do
     pipe_through :browser
 
     get "/:code", RedirectController, :redirect_url
-    live "/", HomeLive, :home
+    live "/", HomeLive.Index, :index
   end
 
   # Other scopes may use custom stacks.
