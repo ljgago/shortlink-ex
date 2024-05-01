@@ -22,7 +22,10 @@ defmodule ShortlinkWeb.RedirectController do
 
       link ->
         Links.refresh_link(link)
-        redirect(conn, external: link.long_url)
+
+        conn
+        |> put_status(301)
+        |> redirect(external: link.long_url)
     end
   end
 end
