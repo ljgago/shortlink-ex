@@ -383,7 +383,7 @@ defmodule ShortlinkWeb.CoreComponents do
         class={[
           "block w-full rounded-lg text-zinc-900 dark:text-white dark:bg-zinc-800 focus:ring-0 sm:text-sm sm:leading-6",
           "phx-no-feedback:border-zinc-300 dark:phx-no-feedback:border-zinc-600 phx-no-feedback:focus:border-zinc-400 dark:phx-no-feedback:focus:border-zinc-400",
-          @errors == [] && "border-zinc-300 focus:border-zinc-400",
+          @errors == [] && "border-zinc-300 dark:border-zinc-600 focus:border-zinc-400 dark:focus:border-zinc-400",
           @errors != [] && "border-red-500 focus:border-red-500"
         ]}
         {@rest}
