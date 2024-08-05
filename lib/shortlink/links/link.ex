@@ -11,8 +11,9 @@ defmodule Shortlink.Links.Link do
     field :code, :string
     field :expire, :utc_datetime
     field :visit_count, :integer, default: 0
+    # belongs_to :user, Shortlink.Accounts.User
 
-    timestamps()
+    timestamps(type: :utc_datetime)
   end
 
   @doc false

@@ -151,9 +151,7 @@ defmodule ShortlinkWeb.CoreComponents do
     <div id={@id}>
       <.flash kind={:info} title={gettext("Success!")} flash={@flash} />
       <.flash kind={:error} title={gettext("Error!")} flash={@flash} />
-      <.flash kind={:copy} title={gettext("Copied to clipboard!")} flash={@flash} />
-
-      <!-- <.flash -->
+      <.flash kind={:copy} title={gettext("Copied to clipboard!")} flash={@flash} /> <!-- <.flash -->
       <!--   id="client-error" -->
       <!--   kind={:error} -->
       <!--   title={gettext("We can't find the internet")} -->
@@ -161,7 +159,7 @@ defmodule ShortlinkWeb.CoreComponents do
       <!--   phx-connected={hide("#client-error")} -->
       <!--   hidden -->
       <!-- > -->
-      <!--   <%= gettext("Attempting to reconnect") %> -->
+      <!-- <%= gettext("Attempting to reconnect") %> -->
       <!--   <.icon name="hero-arrow-path" class="ml-1 h-3 w-3 animate-spin" /> -->
       <!-- </.flash> -->
       <!---->
@@ -173,7 +171,7 @@ defmodule ShortlinkWeb.CoreComponents do
       <!--   phx-connected={hide("#server-error")} -->
       <!--   hidden -->
       <!-- > -->
-      <!--   <%= gettext("Hang in there while we get back on track") %> -->
+      <!-- <%= gettext("Hang in there while we get back on track") %> -->
       <!--   <.icon name="hero-arrow-path" class="ml-1 h-3 w-3 animate-spin" /> -->
       <!-- </.flash> -->
     </div>
@@ -206,7 +204,7 @@ defmodule ShortlinkWeb.CoreComponents do
   def simple_form(assigns) do
     ~H"""
     <.form :let={f} for={@for} as={@as} {@rest}>
-      <div class="mt-10 space-y-8 bg-white">
+      <div class="mt-10 space-y-8">
         <%= render_slot(@inner_block, f) %>
         <div :for={action <- @actions} class="mt-2 flex items-center justify-between gap-6">
           <%= render_slot(action, f) %>
@@ -273,6 +271,7 @@ defmodule ShortlinkWeb.CoreComponents do
   """
   attr :id, :any, default: nil
   attr :name, :any
+  attr :icon_label, :string, default: nil
   attr :label, :string, default: nil
   attr :value, :any
 
@@ -313,7 +312,7 @@ defmodule ShortlinkWeb.CoreComponents do
 
     ~H"""
     <div phx-feedback-for={@name}>
-      <label class="flex items-center gap-4 text-sm leading-6 text-zinc-600">
+      <label class="flex items-center gap-4 text-sm leading-6 text-zinc-600 dark:text-zinc-300">
         <input type="hidden" name={@name} value="false" />
         <input
           type="checkbox"
@@ -321,7 +320,10 @@ defmodule ShortlinkWeb.CoreComponents do
           name={@name}
           value="true"
           checked={@checked}
-          class="rounded border-zinc-300 text-zinc-900 focus:ring-0"
+          class={[
+            "rounded focus:ring-0 focus:ring-offset-0 dark:hover:checked:bg-blue-600",
+            "dark:checked:bg-blue-500 checked:bg-blue-500 dark:bg-zinc-900"
+          ]}
           {@rest}
         />
         <%= @label %>
@@ -374,7 +376,7 @@ defmodule ShortlinkWeb.CoreComponents do
   def input(assigns) do
     ~H"""
     <div phx-feedback-for={@name}>
-      <.label for={@id}><%= @label %></.label>
+      <.label for={@id} icon={@icon_label}><%= @label %></.label>
       <input
         type={@type}
         name={@name}
@@ -383,7 +385,8 @@ defmodule ShortlinkWeb.CoreComponents do
         class={[
           "block w-full rounded-lg text-zinc-900 dark:text-white dark:bg-zinc-800 focus:ring-0 sm:text-sm sm:leading-6",
           "phx-no-feedback:border-zinc-300 dark:phx-no-feedback:border-zinc-600 phx-no-feedback:focus:border-zinc-400 dark:phx-no-feedback:focus:border-zinc-400",
-          @errors == [] && "border-zinc-300 dark:border-zinc-600 focus:border-zinc-400 dark:focus:border-zinc-400",
+          @errors == [] &&
+            "border-zinc-300 dark:border-zinc-600 focus:border-zinc-400 dark:focus:border-zinc-400",
           @errors != [] && "border-red-500 focus:border-red-500"
         ]}
         {@rest}
@@ -397,11 +400,15 @@ defmodule ShortlinkWeb.CoreComponents do
   Renders a label.
   """
   attr :for, :string, default: nil
+  attr :icon, :string, default: nil
   slot :inner_block, required: true
 
   def label(assigns) do
     ~H"""
-    <label for={@for} class="block text-sm font-semibold leading-6 text-zinc-800">
+    <label for={@for} class="block font-semibold leading-8">
+      <%= if @icon do %>
+        <.icon name={@icon} />
+      <% end %>
       <%= render_slot(@inner_block) %>
     </label>
     """
@@ -434,10 +441,10 @@ defmodule ShortlinkWeb.CoreComponents do
     ~H"""
     <header class={[@actions != [] && "flex items-center justify-between gap-6", @class]}>
       <div>
-        <h1 class="text-lg font-semibold leading-8 text-zinc-800">
+        <h1 class="text-lg font-semibold leading-8 text-zinc-800 dark:text-zinc-50">
           <%= render_slot(@inner_block) %>
         </h1>
-        <p :if={@subtitle != []} class="mt-2 text-sm leading-6 text-zinc-600">
+        <p :if={@subtitle != []} class="mt-2 text-sm leading-6 text-zinc-600 dark:text-zinc-300">
           <%= render_slot(@subtitle) %>
         </p>
       </div>
