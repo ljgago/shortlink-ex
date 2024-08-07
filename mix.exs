@@ -32,18 +32,18 @@ defmodule Shortlink.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:bcrypt_elixir, "~> 3.0"},
-      {:phoenix, "~> 1.7.12"},
-      {:phoenix_ecto, "~> 4.4"},
+      {:phoenix, "~> 1.7.14"},
+      {:phoenix_ecto, "~> 4.5"},
       {:ecto_sql, "~> 3.10"},
       {:postgrex, ">= 0.0.0"},
-      {:phoenix_html, "~> 4.0"},
+      {:phoenix_html, "~> 4.1"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
-      {:phoenix_live_view, "~> 0.20.2"},
+      # TODO bump on release to {:phoenix_live_view, "~> 1.0.0"},
+      {:phoenix_live_view, "~> 1.0.0-rc.6", override: true},
       {:floki, ">= 0.30.0", only: :test},
       {:phoenix_live_dashboard, "~> 0.8.3"},
       {:esbuild, "~> 0.8", runtime: Mix.env() == :dev},
-      {:tailwind, "~> 0.2", runtime: Mix.env() == :dev},
+      {:tailwind, "~> 0.2.3", runtime: Mix.env() == :dev},
       {:heroicons,
        github: "tailwindlabs/heroicons",
        tag: "v2.1.3",
@@ -53,14 +53,15 @@ defmodule Shortlink.MixProject do
        depth: 1},
       {:swoosh, "~> 1.5"},
       {:finch, "~> 0.13"},
-      {:telemetry_metrics, "~> 0.6"},
+      {:telemetry_metrics, "~> 1.0"},
       {:telemetry_poller, "~> 1.0"},
       {:gettext, "~> 0.20"},
       {:jason, "~> 1.2"},
       {:dns_cluster, "~> 0.1.1"},
-      {:bandit, "~> 1.2"},
+      {:bandit, "~> 1.5"},
       {:sqids, "~> 0.1.0"},
-      {:quantum, "~> 3.5"}
+      {:quantum, "~> 3.5"},
+      {:bcrypt_elixir, "~> 3.0"},
     ]
   end
 
