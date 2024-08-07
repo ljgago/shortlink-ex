@@ -37,3 +37,4 @@ npm-debug.log
 
 # Ignore lsp
 /.elixir_ls
+/.lexical
