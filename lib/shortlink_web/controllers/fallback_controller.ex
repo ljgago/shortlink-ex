@@ -1,4 +1,4 @@
-defmodule Shortlink.FallbackController do
+defmodule ShortlinkWeb.FallbackController do
   @moduledoc """
   Translates controller action results into valid `Plug.Conn` responses.
 

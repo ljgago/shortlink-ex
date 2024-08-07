@@ -3,6 +3,7 @@ defmodule ShortlinkWeb.UserSessionController do
 
   alias Shortlink.Accounts
   alias ShortlinkWeb.UserAuth
+  alias ShortlinkWeb.FallbackController
 
   action_fallback FallbackController
 
