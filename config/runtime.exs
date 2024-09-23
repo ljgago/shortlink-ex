@@ -20,6 +20,18 @@ if System.get_env("PHX_SERVER") do
   config :shortlink, ShortlinkWeb.Endpoint, server: true
 end
 
+config :shortlink, :oidc,
+  client_id: System.get_env("ZITADEL_CLIENT_ID"),
+  client_secret: System.get_env("ZITADEL_CLIENT_SECRET"),
+  base_url: System.get_env("ZITADEL_BASE_URL"),
+  redirect_uri: System.get_env("ZITADEL_REDIRECT_URI"),
+  authorize_url: System.get_env("ZITADEL_AUTHORIZE_URL"),
+  user_url: System.get_env("ZITADEL_USER_URL"),
+  token_url: System.get_env("ZITADEL_TOKEN_URL"),
+  revoke_url: System.get_env("ZITADEL_REVOKE_URL"),
+  authorization_params: [scope: System.get_env("ZITADEL_SCOPE")],
+  trusted_audiences: System.get_env("ZITADEL_TRUSTED_AUDIENCES")
+
 if config_env() == :prod do
   database_url =
     System.get_env("DATABASE_URL") ||
