@@ -16,10 +16,12 @@ function setDarkMode(on) {
   if (on) {
     localStorage.theme = 'dark'
     document.documentElement.classList.add('dark')
+    window.dark = true
   } else {
     // darkModeToggleInput.checked = false
     localStorage.theme = 'light'
     document.documentElement.classList.remove('dark')
+    window.dark = false
   }
 }
 
@@ -28,4 +30,4 @@ Alpine.magic("clipboard", () => subject => {
 })
 
 window.setDarkMode = setDarkMode
-window.dark= dark
+window.dark = dark
