@@ -55,13 +55,15 @@ defmodule Shortlink.MixProject do
       {:finch, "~> 0.13"},
       {:telemetry_metrics, "~> 1.0"},
       {:telemetry_poller, "~> 1.0"},
-      {:gettext, "~> 0.20"},
-      {:jason, "~> 1.2"},
+      {:gettext, "~> 0.26"},
+      {:jason, "~> 1.4"},
       {:dns_cluster, "~> 0.1.1"},
       {:bandit, "~> 1.5"},
       {:sqids, "~> 0.1.0"},
       {:quantum, "~> 3.5"},
       {:bcrypt_elixir, "~> 3.0"},
+      {:req, "~> 0.5.6"},
+      {:assent, "~> 0.2.10"},
     ]
   end
 
