@@ -66,7 +66,7 @@ config :shortlink, Shortlink.Scheduler,
   jobs: [
     delete_expired_job: [
       schedule: "@daily",
-      task: {Shortlink.Links, :delete_expired_links, []},
+      task: {Shortlink.Links, :delete_expired_links, []}
     ]
   ]
 

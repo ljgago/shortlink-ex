@@ -18,7 +18,6 @@ defmodule ShortlinkWeb.RedirectController do
         conn
         |> put_status(:not_found)
         |> put_view(html: ShortlinkWeb.ErrorHTML)
-        |> assign(:current_user, nil)
         |> render(:"404")
 
       link ->

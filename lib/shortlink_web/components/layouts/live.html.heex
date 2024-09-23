@@ -2,7 +2,6 @@
   <nav class="mx-6 text-xl grid place-items-center">
     <ul class="flex justify-between items-center flex-col md:flex-row md:w-[720px] w-full text-nowrap">
       <div class="flex items-center justify-center gap-x-6 h-16">
-
         <!-- Github icon -->
         <li>
           <a href="https://github.com/ljgago/shortlink-ex" target="_blank">
@@ -14,7 +13,6 @@
             </svg>
           </a>
         </li>
-
         <!-- Dark mode toggle -->
         <li x-data="{ dark: window.dark }" class="flex">
           <button x-on:click="dark = !dark; setDarkMode(dark)">
@@ -27,29 +25,27 @@
           </button>
         </li>
       </div>
-
       <div class="grow" />
-
       <!-- User info -->
       <div class="relative z-10 flex items-center justify-end gap-4">
         <%= if @current_user do %>
           <li class="text-[0.8125rem] text-zinc-900 dark:text-zinc-50 text-ellipsis overflow-hidden">
-            <%= @current_user.email %>
+            <%= @current_user %>
           </li>
           <li class="flex">
-            <%= if @path == "/_/settings" do %>
+            <%= if @path == "/_/links" do %>
               <.link
-                href={~p"/"}
+                navigate={~p"/"}
                 class="text-[0.8125rem] text-zinc-900 dark:text-zinc-50 font-semibold hover:text-zinc-700 dark:hover:text-zinc-400"
               >
                 Home
               </.link>
             <% else %>
               <.link
-                href={~p"/_/settings"}
+                navigate={~p"/_/links"}
                 class="text-[0.8125rem] text-zinc-900 dark:text-zinc-50 font-semibold hover:text-zinc-700 dark:hover:text-zinc-400"
               >
-                Settings
+                Links
               </.link>
             <% end %>
           </li>
@@ -62,26 +58,8 @@
               Log out
             </.link>
           </li>
-        <% else %>
-          <li class="flex">
-            <.link
-              href={~p"/_/signup"}
-              class="text-[0.8125rem] text-zinc-900 dark:text-zinc-50 font-semibold hover:text-zinc-700 dark:hover:text-zinc-400"
-            >
-              Register
-            </.link>
-          </li>
-          <li class="flex">
-            <.link
-              href={~p"/_/login"}
-              class="text-[0.8125rem] text-zinc-900 dark:text-zinc-50 font-semibold hover:text-zinc-700 dark:hover:text-zinc-400 text-ellipsis overflow-hidden"
-            >
-              Log in
-            </.link>
-          </li>
         <% end %>
       </div>
-
     </ul>
   </nav>
 </header>

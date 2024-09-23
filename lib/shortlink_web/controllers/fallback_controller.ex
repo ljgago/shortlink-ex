@@ -17,7 +17,6 @@ defmodule ShortlinkWeb.FallbackController do
   # This clause is an example of how to handle resources that cannot be found.
   def call(conn, {:error, :not_found}) do
     conn
-    |> assign(:current_user, nil)
     |> put_status(:not_found)
     |> put_view(html: ShortlinkWeb.ErrorHTML, json: ShortlinkWeb.ErrorJSON)
     |> render(:"404", layout: :root)

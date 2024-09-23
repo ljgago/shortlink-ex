@@ -1,0 +1,59 @@
+<.flash_group flash={@flash} />
+<section class="mx-6 md:mx-0 grid place-items-center">
+  <div class="flex flex-col gap-2 w-full">
+    <h1 class="pb-14 text-center text-6xl">
+      Shortlink
+    </h1>
+    <div class="flex flex-col gap-6">
+      <.form for={@form} phx-submit="generate">
+        <div class="flex flex-col gap-6">
+          <.input
+            id="long-url-id"
+            type="text"
+            autocomplete="off"
+            icon_label="hero-link-micro"
+            label="Your Long URL"
+            readonly={@form[:short_url].value != nil}
+            field={@form[:long_url]}
+          />
+
+          <%= if @form[:short_url].value != nil do %>
+            <.input
+              id="short-url-id"
+              type="text"
+              autocomplete="off"
+              name="result"
+              icon_label="hero-sparkles-micro"
+              label="Your Short URL"
+              readonly={@form[:short_url].value != nil}
+              field={@form[:short_url]}
+            />
+          <% end %>
+
+          <%= if @form[:short_url].value == nil do %>
+            <.button type="submit" class="h-[42px]">
+              Shorten URL
+            </.button>
+          <% else %>
+            <div class="grid grid grid-cols-[1fr,1fr] justify-stretch gap-2">
+              <.button type="reset" class="h-[42px]" phx-click="new-url">
+                New URL
+              </.button>
+              <.button
+                id="copy"
+                type="button"
+                class="h-[42px]"
+                data-to="#short-url-id"
+                phx-hook="Copy"
+                phx-click="copy-clipboard"
+                value={@form[:short_url].value}
+              >
+                Copy to Clipboard
+              </.button>
+            </div>
+          <% end %>
+        </div>
+      </.form>
+    </div>
+  </div>
+</section>

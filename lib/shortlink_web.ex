@@ -51,8 +51,7 @@ defmodule ShortlinkWeb do
 
   def live_view do
     quote do
-      use Phoenix.LiveView,
-        layout: {ShortlinkWeb.Layouts, :live}
+      use Phoenix.LiveView
 
       unquote(html_helpers())
     end
