@@ -17,7 +17,7 @@ defmodule ShortlinkWeb.CoreComponents do
   use Phoenix.Component
 
   alias Phoenix.LiveView.JS
-  import ShortlinkWeb.Gettext
+  use Gettext, backend: ShortlinkWeb.Gettext
 
   @doc """
   Renders a modal.
