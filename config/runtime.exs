@@ -20,7 +20,7 @@ if System.get_env("PHX_SERVER") do
   config :shortlink, ShortlinkWeb.Endpoint, server: true
 end
 
-config :shortlink, :oidc,
+config :shortlink, :zitadel,
   client_id: System.get_env("ZITADEL_CLIENT_ID"),
   client_secret: System.get_env("ZITADEL_CLIENT_SECRET"),
   base_url: System.get_env("ZITADEL_BASE_URL"),
@@ -31,6 +31,11 @@ config :shortlink, :oidc,
   revoke_url: System.get_env("ZITADEL_REVOKE_URL"),
   authorization_params: [scope: System.get_env("ZITADEL_SCOPE")],
   trusted_audiences: System.get_env("ZITADEL_TRUSTED_AUDIENCES")
+
+config :shortlink, :github,
+  client_id: System.get_env("GITHUB_CLIENT_ID"),
+  client_secret: System.get_env("GITHUB_CLIENT_SECRET"),
+  redirect_uri: System.get_env("GITHUB_REDIRECT_URI")
 
 if config_env() == :prod do
   database_url =
@@ -66,7 +71,7 @@ if config_env() == :prod do
   config :shortlink, :dns_cluster_query, System.get_env("DNS_CLUSTER_QUERY")
 
   config :shortlink, ShortlinkWeb.Endpoint,
-    url: [host: host, port: 443, scheme: "https"],
+    url: [host: host, port: 4040, scheme: "https"],
     http: [
       # Enable IPv6 and bind on all interfaces.
       # Set it to  {0, 0, 0, 0, 0, 0, 0, 1} for local network only access.

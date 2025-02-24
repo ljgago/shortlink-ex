@@ -233,8 +233,9 @@ defmodule ShortlinkWeb.CoreComponents do
     <button
       type={@type}
       class={[
-        "phx-submit-loading:opacity-75 rounded-lg bg-zinc-900 dark:bg-white hover:bg-zinc-700 dark:hover:bg-zinc-300 py-2 px-3",
-        "text-sm font-semibold leading-6 text-white dark:text-zinc-900 active:text-white/80",
+        "phx-submit-loading:opacity-75 rounded-lg py-2 px-3 text-sm font-semibold leading-6 cursor-pointer",
+        "bg-zinc-900 hover:bg-zinc-700 text-white active:text-white/80",
+        "dark:bg-white dark:hover:bg-zinc-300 dark:text-zinc-900 dark:active:text-zinc-900/80",
         @class
       ]}
       {@rest}

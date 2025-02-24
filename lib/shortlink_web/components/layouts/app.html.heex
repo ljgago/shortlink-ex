@@ -16,7 +16,7 @@
 
       <!-- Dark mode toggle -->
       <li x-data="{ dark: window.dark }" class="flex">
-        <button x-on:click="dark = !dark; setDarkMode(dark)">
+        <button x-on:click="dark = !dark; setDarkMode(dark)" class="cursor-pointer">
           <div x-show="!dark" class="flex">
             <.icon name="hero-sun" class="h-7 w-7" />
           </div>

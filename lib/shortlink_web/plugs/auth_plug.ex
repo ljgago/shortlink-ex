@@ -25,7 +25,7 @@ defmodule ShortlinkWeb.AuthPlug do
       %{"session_params" => session_params, "token" => %{"id_token" => id_token}} ->
         valid =
           Shortlink.OAuth2.Zitadel.config()
-          |> Assent.Config.put(:session_params, session_params)
+          |> Keyword.put(:session_params, session_params)
           |> Assent.Strategy.OIDC.validate_id_token(id_token)
 
         case valid do

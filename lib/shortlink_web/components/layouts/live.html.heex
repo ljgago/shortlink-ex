@@ -15,7 +15,7 @@
         </li>
         <!-- Dark mode toggle -->
         <li x-data="{ dark: window.dark }" class="flex">
-          <button x-on:click="dark = !dark; setDarkMode(dark)">
+          <button x-on:click="dark = !dark; setDarkMode(dark)" class="cursor-pointer">
             <div x-show="!dark" class="flex">
               <.icon name="hero-sun" class="h-7 w-7" />
             </div>
@@ -36,14 +36,14 @@
             <%= if @path == "/_/links" do %>
               <.link
                 navigate={~p"/"}
-                class="text-[0.8125rem] text-zinc-900 dark:text-zinc-50 font-semibold hover:text-zinc-700 dark:hover:text-zinc-400"
+                class="text-[0.8125rem] text-zinc-900 dark:text-zinc-50 font-semibold hover:text-zinc-700 dark:hover:text-zinc-400 w-8 text-center"
               >
                 Home
               </.link>
             <% else %>
               <.link
                 navigate={~p"/_/links"}
-                class="text-[0.8125rem] text-zinc-900 dark:text-zinc-50 font-semibold hover:text-zinc-700 dark:hover:text-zinc-400"
+                class="text-[0.8125rem] text-zinc-900 dark:text-zinc-50 font-semibold hover:text-zinc-700 dark:hover:text-zinc-400 w-8 text-center"
               >
                 Links
               </.link>

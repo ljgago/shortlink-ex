@@ -44,7 +44,8 @@ config :esbuild,
 
 # Configure tailwind (the version is required)
 config :tailwind,
-  version: "3.4.4",
+  version: "4.0.0",
+  # version: "3.4.17",
   shortlink: [
     args: ~w(
       --config=tailwind.config.js
@@ -60,7 +61,7 @@ config :logger, :console,
   metadata: [:request_id]
 
 # Use Jason for JSON parsing in Phoenix
-config :phoenix, :json_library, Jason
+config :phoenix, :json_library, JSON
 
 config :shortlink, Shortlink.Scheduler,
   jobs: [

@@ -32,16 +32,16 @@ defmodule Shortlink.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.7.14"},
+      {:phoenix, "~> 1.7.18"},
       {:phoenix_ecto, "~> 4.5"},
       {:ecto_sql, "~> 3.10"},
       {:postgrex, ">= 0.0.0"},
       {:phoenix_html, "~> 4.1"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       # TODO bump on release to {:phoenix_live_view, "~> 1.0.0"},
-      {:phoenix_live_view, "~> 1.0.0-rc.6", override: true},
+      {:phoenix_live_view, "~> 1.0"},
       {:floki, ">= 0.30.0", only: :test},
-      {:phoenix_live_dashboard, "~> 0.8.3"},
+      {:phoenix_live_dashboard, "~> 0.8.6"},
       {:esbuild, "~> 0.8", runtime: Mix.env() == :dev},
       {:tailwind, "~> 0.2.3", runtime: Mix.env() == :dev},
       {:heroicons,
@@ -58,12 +58,12 @@ defmodule Shortlink.MixProject do
       {:gettext, "~> 0.26"},
       {:jason, "~> 1.4"},
       {:dns_cluster, "~> 0.1.1"},
-      {:bandit, "~> 1.5"},
+      {:bandit, "~> 1.6"},
       {:sqids, "~> 0.1.0"},
       {:quantum, "~> 3.5"},
       {:bcrypt_elixir, "~> 3.0"},
       {:req, "~> 0.5.6"},
-      {:assent, "~> 0.2.10"},
+      {:assent, "~> 0.3.0"},
     ]
   end
 

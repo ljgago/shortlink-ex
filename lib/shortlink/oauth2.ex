@@ -1,14 +1,16 @@
 defmodule Shortlink.OAuth2 do
+  alias Shortlink.OAuth2
+
   def get_provider(provider) do
     case provider do
       "github" ->
-        nil
+        OAuth2.Github
 
       "zitadel" ->
-        Shortlink.OAuth2.Zitadel
+        OAuth2.Zitadel
 
       _ ->
-        Shortlink.OAuth2.Zitadel
+        OAuth2.Zitadel
     end
   end
 end

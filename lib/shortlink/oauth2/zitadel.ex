@@ -16,8 +16,8 @@ defmodule Shortlink.OAuth2.Zitadel do
 
   defp get_config(key) do
     :shortlink
-    |> Application.fetch_env!(:oidc)
-    |> Keyword.fetch!(key)
+    |> Application.fetch_env!(:zitadel)
+    |> Keyword.get(key, nil)
   end
 
   def authorize_url() do
@@ -27,7 +27,7 @@ defmodule Shortlink.OAuth2.Zitadel do
 
   def callback(conn, params) do
     config()
-    |> Assent.Config.put(:session_params, Plug.Conn.get_session(conn, :session_params))
+    |> Keyword.put(:session_params, Plug.Conn.get_session(conn, :session_params))
     |> Assent.Strategy.OIDC.callback(params)
   end
 
@@ -37,7 +37,7 @@ defmodule Shortlink.OAuth2.Zitadel do
       %{"session_params" => session_params, "token" => %{"id_token" => id_token}} ->
         valid =
           config()
-          |> Assent.Config.put(:session_params, session_params)
+          |> Keyword.put(:session_params, session_params)
           |> Assent.Strategy.OIDC.validate_id_token(id_token)
 
         case valid do
@@ -54,7 +54,7 @@ defmodule Shortlink.OAuth2.Zitadel do
     config()
     |> Assent.Strategy.OAuth2.refresh_access_token(
       token,
-      client_secret: Assent.Config.get(config(), :client_secret, "")
+      client_secret: Keyword.get(config(), :client_secret, "")
     )
   end
 end
