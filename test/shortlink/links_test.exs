@@ -22,6 +22,7 @@ defmodule Shortlink.LinksTest do
 
     test "create_link/1 with valid data creates a link" do
       valid_attrs = %{
+        email: "test@test.com",
         long_url: "http://localhost:4000",
         code: "aBcDeFgHiJk",
         expire: ~U[2024-01-01 12:00:00Z]
