@@ -31,16 +31,16 @@
           <% end %>
 
           <%= if @form[:short_url].value == nil do %>
-            <.button type="submit" class="h-[42px]">
+            <.button id="shorten-url" type="submit" class="h-[42px]">
               Shorten URL
             </.button>
           <% else %>
             <div class="grid grid-cols-[1fr,1fr] justify-stretch gap-4">
-              <.button type="reset" class="h-[42px]" phx-click="new-url">
+              <.button id="new-url" type="reset" class="h-[42px]" phx-click="new-url">
                 New URL
               </.button>
               <.button
-                id="copy"
+                id="copy-to-clipboard"
                 type="button"
                 class="h-[42px]"
                 data-to="#short-url-id"
