@@ -21,6 +21,22 @@ defmodule Shortlink.Links do
   end
 
   @doc """
+  Returns the list of links by email.
+
+  ## Examples
+
+      iex> list_links_by_email(demo@demo.com)
+      [%Link{}, ...]
+
+  """
+
+  def list_links_by_email(email) do
+    Link
+    |> where(email: ^email)
+    |> Repo.all()
+  end
+
+  @doc """
   Gets a single link.
 
   Raises `Ecto.NoResultsError` if the Link does not exist.
