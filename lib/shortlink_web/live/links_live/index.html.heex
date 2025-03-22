@@ -1,3 +1,8 @@
 <div>
-  DEMOO!!
+  <.table id="links" rows={@links}>
+    <:col :let={link} label="Long URL"><%= link.long_url %></:col>
+    <:col :let={link} label="Short ULR"><%= link.short_url %></:col>
+    <:col :let={link} label="Visit Count"><%= link.visit_count %></:col>
+    <:col :let={link} label="Expire"><%= link.expire %></:col>
+  </.table>
 </div>
